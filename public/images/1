@@ -1,0 +1,24 @@
+<VirtualHost *:80>
+    ServerName www.diseaselinks.com
+    ServerAlias www.diseaselinks.com
+
+    # Redirect HTTP to HTTPS
+    Redirect permanent / https://yourdomain.com/
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName yourdomain.com
+    ServerAlias www.yourdomain.com
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/yourdomain.com/cert.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/yourdomain.com/privkey.pem
+    SSLCertificateChainFile /etc/letsencrypt/live/yourdomain.com/chain.pem
+
+    DocumentRoot /var/www/yourdomain.com
+    <Directory /var/www/yourdomain.com>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
